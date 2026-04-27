@@ -80,8 +80,7 @@ def extract_parameter_dict(nb, lang=None, tag='Parameters'):
     *tag* specifies the cell tag which it will look for, with case-insensitive
     matching. If no code cell has the tag, it will take the first code cell.
     """
-    params = extract_parameters(nb, lang, tag=tag)
-    return {p.name: p for p in params}
+    pass
 
 def extract_parameters(nb, lang=None, tag='Parameters'):
     """Returns a list of Parameter instances derived from the notebook.

@@ -9,35 +9,10 @@ from ..code import Parameter
 __all__ = ['extract_definitions', 'build_definitions']
 
 def check_list(node):
-    def bool_check(node):
-        return isinstance(node, ast.NameConstant) and (node.value in (True, False))
-    def neg_check(node):
-        return isinstance(node.operand, ast.Num) if isinstance(node, ast.UnaryOp) else False
-    return all([(isinstance(n, (ast.Num, ast.Str)) 
-                 or bool_check(n) or neg_check(n)) for n in node.elts])
+    pass
 
 def check_fillable_node(node, path):
-    if isinstance(node, (ast.Num, ast.Str)):
-        return
-    elif isinstance(node, ast.UnaryOp) and isinstance(node.operand, ast.Num):
-        return
-    elif (isinstance(node, ast.List) 
-          and isinstance(node.ctx, ast.Load) and check_list(node)):
-        return
-    elif isinstance(node, ast.NameConstant) and (node.value in (True, False)):
-        return
-    elif isinstance(node, ast.List):
-        for n in node.elts:
-            check_fillable_node(n, path)
-        return
-    elif isinstance(node, ast.Dict):
-        for n in node.keys:
-            check_fillable_node(n, path)
-        for n in node.values:
-            check_fillable_node(n, path)
-        return
-    
-    raise astcheck.ASTMismatch(path, node, 'number, string, boolean, list or dict')
+    pass
 
 definition_pattern = astcheck.single_assign(target=ast.Name(), value=check_fillable_node)
 
